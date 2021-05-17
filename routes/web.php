@@ -29,6 +29,7 @@ Route::get('wilayah', [WilayahController::class, 'index'])->name('wilayah.index'
 Route::get('wilayah/create', [WilayahController::class, 'create'])->name('wilayah.create');
 Route::post('wilayah/store', [WilayahController::class, 'store'])->name('wilayah.store');
 Route::get('sta/create/{id}', [JalanController::class, 'getstaId'])->name('sta.create');
+Route::post('sta/create', [JalanController::class, 'getstaCreate'])->name('sta.store');
 
 
 // Route::group(['middleware' => ['auth']], function () {

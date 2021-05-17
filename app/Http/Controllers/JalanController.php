@@ -62,7 +62,7 @@ class JalanController extends Controller
         $jsonData = $response->json();
 
         $wilayahs = $jsonData['data']['kabupaten'][0];
-        
+
         return view('wilayah.create')->with('wilayahs', $wilayahs);
     }
 
@@ -155,39 +155,90 @@ class JalanController extends Controller
         return redirect()->route('jalan.index');
     }
 
-    public function getstaId($id){
+    public function getstaId($ids)
+    {
+        $response = Http::get('https://api.gate.sijantankotaku.co.id/public_alpha/street/', $ids);
+
+        $jsonData = $response->json();
+
+        // $data
+        // dd($ids);
+        $id = 0;
+
+        $jalansta = $jsonData['data']['list'];
+        foreach ($jalansta as $key => $val) {
+            if ($val['id'] == $ids) {
+                // dd($val['nama_ruas']);
+                // return view('sta.create')->with($val['id']);
+                $id = $ids;
+            }
+        }
+        // dd($jalansta);
+        return view('sta.create')->with(['idsusah' => $id]);
+        // $options = [
+        //     'data' =>
+        //     [
+        //         "id" => $id,
+        //     ],
+        //     "type" => "numeric"
+        // ];
+
+
+        // $response = Http::post('https://api.gate.sijantankotaku.co.id/api_alpha/street/show', $options);
+        // $jsonData = $response->json();
+
+
+
+        // $jalans = json_decode((string)$response->getBody(), true);
+
+
+
+        // text
+        // return view('jalans.index')->with('jalans', $jalans);
+        // dd($jsonData['data'][0]);
+
+
+
+
+
+        // dd($id);
+
+
+        // return view('sta.create')->with('stas', $stas);
+        // // $response = Http::put('https://api.gate.sijantankotaku.co.id/api_alpha/street-sta/create', $id)   
+
+        // return view('sta.create')->with('jalans');
+    }
+
+    public function getstaCreate(Request $request)
+    {
+        $data = $request->all();
+        // dd($data);
 
         $options = [
             'data' =>
             [
-                "id" => $id,
+                "id_jalan" => $data['id_jalan'],
+                "sta" => $data['sta'],
+                "dms_start" => $data['dms_start'],
+                "dms_end" => $data['dms_end'],
+                "lat" => $data['lat'],
+                "lon" => $data['lon'],
+                "panjang_jalan" => $data['panjang_jalan'],
+                "lebar_jalan" => $data['lebar_jalan'],
+                "klasifikasi_status" => $data['klasifikasi_status'],
+                "klasifikasi_fungsi" => $data['klasifikasi_fungsi']
             ],
-            "type" => "numeric"
+            "type" => "object"
         ];
-        
-                
-        $response = Http::post('https://api.gate.sijantankotaku.co.id/api_alpha/street/show', $options);
+
+        $response = Http::post(
+            'https://api.gate.sijantankotaku.co.id/api_alpha/street-sta/create',
+            $options
+        );
+
         $jsonData = $response->json();
-
-        // $jalans = json_decode((string)$response->getBody(), true);
-        
-
-
-
-        // return view('jalans.index')->with('jalans', $jalans);
-        // dd($jsonData);
-        
-        
-
-
-        
-        // dd($id);
-                
-        
-        // return view('sta.create')->with('stas', $stas);
-        // // $response = Http::put('https://api.gate.sijantankotaku.co.id/api_alpha/street-sta/create', $id)   
-        
-        return view('sta.create');
-
+        dd($jsonData);
+        // return redirect()->route('jalan.index');
     }
 }

@@ -1,24 +1,29 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Input Data Jalan') }}
+            {{ __('Input Data Jalan STA') }}
+            {{-- {{ $jalans['nama_ruas'] }} --}}
         </h2>
     </x-slot>
 
     <div>
         <div class="max-w-4xl mx-auto py-10 sm:px-6 lg:px-8">
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="POST" action="#">
+                <form method="POST" action="{{ route('sta.store') }}">
                     @csrf
                     <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="id_jalan" class="block font-medium text-sm text-gray-700">ID Jalan</label>
+                            {{-- @foreach ($jalansta as $jalan)
+                            @if ($jalan['id'] == $id) { --}}
                             <input type="text" name="id_jalan" id="id_jalan" type="text"
                                 class="form-input rounded-md shadow-sm mt-1 block w-full"
-                                value="{{ old('id_jalan') }}" readonly/>
+                                value="{{ $idsusah }}" readonly/>
                             @error('id_jalan')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror
+                            {{-- @endif
+                            @endforeach --}}
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
@@ -96,22 +101,18 @@
 
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="klasifikasi_status" class="block font-medium text-sm text-gray-700">Klasifikasi Status</label>
-                            <input type="text" name="klasifikasi_status" id="klasifikasi_status" type="text"
-                                class="form-input rounded-md shadow-sm mt-1 block w-full"
-                                value="{{ old('klasifikasi_status') }}" />
-                            @error('klasifikasi_status')
-                                <p class="text-sm text-red-600">{{ $message }}</p>
-                            @enderror
+                                <input type="checkbox" name="klasifikasi_status[]" value="0">Jalan Kota
+                                <input type="checkbox" name="klasifikasi_status[]" value="1">Jalan Kabupaten
+                                <input type="checkbox" name="klasifikasi_status[]" value="2">Jalan Arteri
+                            
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="klasifikasi_fungsi" class="block font-medium text-sm text-gray-700">Klasifikasi Fungsi</label>
-                            <input type="text" name="klasifikasi_fungsi" id="klasifikasi_fungsi" type="text"
-                                class="form-input rounded-md shadow-sm mt-1 block w-full"
-                                value="{{ old('klasifikasi_fungsi') }}" />
-                            @error('klasifikasi_fungsi')
-                                <p class="text-sm text-red-600">{{ $message }}</p>
-                            @enderror
+                            <input type="radio" name="klasifikasi_fungsi" value="0">
+                            <label for="0">Primer</label>
+                            <input type="radio" name="klasifikasi_fungsi" value="1">
+                            <label for="0">Sekunder</label>
                         </div>
 
                         <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
