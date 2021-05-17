@@ -215,6 +215,12 @@ class JalanController extends Controller
         $data = $request->all();
         // dd($data);
 
+        // if ($data['klasifikasi_fungsi'] == null) {
+        //     $data['klasifikasi_fungsi'] = "0";
+        // };
+
+        // $str_json = json_encode($data['klasifikasi_status']);
+
         $options = [
             'data' =>
             [
@@ -228,9 +234,24 @@ class JalanController extends Controller
                 "lebar_jalan" => $data['lebar_jalan'],
                 "klasifikasi_status" => $data['klasifikasi_status'],
                 "klasifikasi_fungsi" => $data['klasifikasi_fungsi']
+                // ],
+                // "type" => "object"
+
+                // "id_jalan" => 1,
+                // "sta" => "0+300",
+                // "dms_start" => "-10°9'44,821\"S",
+                // "dms_end" => "123°34'34,047\"E",
+                // "lat" => "-10.944821",
+                // "lon" => "123.3434047",
+                // "panjang_jalan" => 150,
+                // "lebar_jalan" => 8,
+                // "klasifikasi_status" => 1,
+                // "klasifikasi_fungsi" => 1
             ],
             "type" => "object"
         ];
+
+        // dd($options);
 
         $response = Http::post(
             'https://api.gate.sijantankotaku.co.id/api_alpha/street-sta/create',
@@ -238,7 +259,7 @@ class JalanController extends Controller
         );
 
         $jsonData = $response->json();
-        dd($jsonData);
-        // return redirect()->route('jalan.index');
+        // dd($jsonData);
+        return redirect()->route('jalan.index');
     }
 }

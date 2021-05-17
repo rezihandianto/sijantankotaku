@@ -101,10 +101,12 @@
 
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="klasifikasi_status" class="block font-medium text-sm text-gray-700">Klasifikasi Status</label>
-                                <input type="checkbox" name="klasifikasi_status[]" value="0">Jalan Kota
-                                <input type="checkbox" name="klasifikasi_status[]" value="1">Jalan Kabupaten
-                                <input type="checkbox" name="klasifikasi_status[]" value="2">Jalan Arteri
-                            
+                            <input type="radio" name="klasifikasi_status" value="0">
+                            <label for="0">Jalan Kota</label>
+                            <input type="radio" name="klasifikasi_status" value="1">
+                            <label for="0">Jalan Kabupaten</label>
+                            <input type="radio" name="klasifikasi_status" value="2">
+                            <label for="0">Jalan Arteri</label>
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
