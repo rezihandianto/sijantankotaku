@@ -19,34 +19,29 @@
                                             <tr>
                                                 <th scope="col"
                                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Id Provinsi
+                                                    Id Kecamatan
                                                 </th>
                                                 <th scope="col"
                                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Nama Provinsi
+                                                    Nama Kecamatan
                                                 </th>
-
                                             </tr>
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200">
-                                            @foreach ($wilayahs as $wilayah)
-
-
+                                            @foreach ($wilayahs['kecamatan'] as $wilayah)
                                                 <tr>
                                                     <td class="px-6 py-4 whitespace-nowrap">
                                                         <div class="flex items-center">
                                                             <div class="flex-shrink-0 h-10 w-10">
-                                                                {{ $wilayah['id_provinsi'] }}
+                                                                {{ $wilayah['id_kecamatan'] }}
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap">
                                                         <div class="text-sm text-gray-900">
-                                                            {{ $wilayah->provinsi }}
+                                                            {{ $wilayah['nama_kecamatan']}}
                                                         </div>
                                                     </td>
-
-
                                                 </tr>
                                                 {{-- @empty
                                                     <tr>

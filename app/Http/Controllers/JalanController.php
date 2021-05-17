@@ -8,6 +8,7 @@ use App\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Symfony\Component\Console\Input\Input;
 
 class JalanController extends Controller
 {
@@ -57,7 +58,12 @@ class JalanController extends Controller
     public function create()
     {
 
-        return view('jalans.create');
+        $response = Http::get('https://api.gate.sijantankotaku.co.id/api_alpha/wilayah/list');
+        $jsonData = $response->json();
+
+        $wilayahs = $jsonData['data']['kabupaten'][0];
+        
+        return view('wilayah.create')->with('wilayahs', $wilayahs);
     }
 
     /**
@@ -79,7 +85,7 @@ class JalanController extends Controller
             'data' =>
             [
                 "no_ruas" => $data['no_ruas'],
-                "id_kecamatan" => 5371041,
+                "id_kecamatan" => $data['id_kecamatan'],
                 "nama_ruas" => $data['nama_ruas'],
                 "patok_sta" => $data['patok_sta'],
                 "geo_dms" => $data['geo_dms'],
@@ -96,7 +102,8 @@ class JalanController extends Controller
         );
 
         $jsonData = $response->json();
-        dd($jsonData);
+        // dd($jsonData);
+        return redirect()->route('jalan.index');
     }
 
     /**
@@ -146,5 +153,41 @@ class JalanController extends Controller
         $jalan->delete();
 
         return redirect()->route('jalan.index');
+    }
+
+    public function getstaId($id){
+
+        $options = [
+            'data' =>
+            [
+                "id" => $id,
+            ],
+            "type" => "numeric"
+        ];
+        
+                
+        $response = Http::post('https://api.gate.sijantankotaku.co.id/api_alpha/street/show', $options);
+        $jsonData = $response->json();
+
+        // $jalans = json_decode((string)$response->getBody(), true);
+        
+
+
+
+        // return view('jalans.index')->with('jalans', $jalans);
+        // dd($jsonData);
+        
+        
+
+
+        
+        // dd($id);
+                
+        
+        // return view('sta.create')->with('stas', $stas);
+        // // $response = Http::put('https://api.gate.sijantankotaku.co.id/api_alpha/street-sta/create', $id)   
+        
+        return view('sta.create');
+
     }
 }

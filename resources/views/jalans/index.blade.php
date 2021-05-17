@@ -9,11 +9,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    @if (Auth::user()->hasRole('admin'))
+                    
                         <a href="{{ route('jalan.create') }}"
                             class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 mb-4">Input
                             Data</a>
-                    @endif
+                    
 
 
                     <div class="flex flex-col">
@@ -25,7 +25,7 @@
                                             <tr>
                                                 <th scope="col"
                                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    No
+                                                    ID
                                                 </th>
                                                 <th scope="col"
                                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -92,9 +92,10 @@
                                                         </div>
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                        <a href="#"
-                                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View</a>
-                                                        @if (Auth::user()->hasRole('admin'))
+                                                        
+                                                        <a href="{{ route('sta.create', $jalan['id']) }}"
+                                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Patok STA</a>
+                                                        
                                                             <a href="#"
                                                                 class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Edit</a>
                                                             <form class="inline-block" action="#" method="post"
@@ -106,7 +107,7 @@
                                                                     class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                                                                     value="Delete">
                                                             </form>
-                                                        @endif
+                                                        
 
                                                     </td>
 

@@ -12,7 +12,9 @@ class WilayahController extends Controller
         $response = Http::get('https://api.gate.sijantankotaku.co.id/api_alpha/wilayah/list');
         $jsonData = $response->json();
 
-        $wilayahs = $jsonData['data'];
+        $wilayahs = $jsonData['data']['kabupaten'][0];
         return view('wilayah.index')->with('wilayahs', $wilayahs);
+        // dd($wilayahs['kecamatan']);
     }
+
 }
